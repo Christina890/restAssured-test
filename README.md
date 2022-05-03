@@ -1,3 +1,27 @@
+### Solution
+
+####Tools and Framework
+* Language - Java
+* Test Framework - TestNG
+* Build Tool - Maven
+
+#### How to set up the project
+* Clone the repository
+* Install maven using
+   ```brew install maven```
+####How to execute the test
+
+ * Execute ```mvn test``` on your terminal
+
+#### How to access the reports
+* Find the test report here 
+  * /user-management-api-test-suite-gyscns/target/surefire-reports/Unzer User/emailable-report.html
+
+#### Potential areas of improvement
+* Use of data providers
+
+
+
 ### Assignment
 Please create a simple test suite that verifies functionality of a public user management API available at https://m3o.com/user/api.
 
@@ -19,3 +43,6 @@ Please create a simple test suite that verifies functionality of a public user m
 * Keep it simple, no need to spend too much time on this task or implement more than 5 test cases.
 * Think about easiness of adding new test cases and making changes when building your test suite/framework.
 * If there is something you would have improved or done differently if you had more time, please feel free to mention it in the readme file.
+
+
+
