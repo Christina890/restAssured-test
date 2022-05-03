@@ -54,10 +54,7 @@ public class TestCases {
   }
   @Test
     void SuccessfulLogin(){
-      Map<String,String> Credentials = new HashMap<String, String>();
-      Credentials.put("password", "Password1*");
-      Credentials.put("email", "apondi1@example.com");
-      Response body = RestAssured.given().auth().oauth2(token).body(Credentials).contentType("application/json").post("https://api.m3o.com/v1/user/Login");
+        Response body= login();
       String userId= body.jsonPath().getString("session.userId");
       Assert.assertEquals(userId.toString(), "user-3");
   }
