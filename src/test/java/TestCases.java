@@ -13,10 +13,10 @@ public class TestCases {
     private String token;
 
     {
-        token = "YWExMjJkNTQtODU1ZC00YTZlLTk2YTEtYzAzNzY0N2VkZjE4";
+        token = "ZjQwNjcyNjAtOGIyNC00MDc2LTk1YmUtMDczZTBhMmNlMWFh";
     }
 
-    public Response login(){
+    public Response getLoginResponse(){
         Map<String,String> Credentials = new HashMap<String, String>();
         Credentials.put("password", "Password1");
         Credentials.put("email", "apondi@example.com");
@@ -28,7 +28,6 @@ public class TestCases {
     void CreateUser(){
         Map<String,String> UserDetails = new HashMap<String, String>();
                 UserDetails.put("email", "apondi@example.com");
-                //UserDetails.put("id", "user-5");
                 UserDetails.put("password", "Password1");
                 UserDetails.put("username", "Apondi");
 
@@ -39,17 +38,16 @@ public class TestCases {
     void DuplicateUserVerification(){
       Map<String,String> UserDetails = new HashMap<String, String>();
       UserDetails.put("email", "apondi@example.com");
-      //UserDetails.put("id", "user-5");
       UserDetails.put("password", "Password1");
       UserDetails.put("username", "Apondi");
-
       Response body= RestAssured.given().auth().oauth2(token).body(UserDetails).contentType("application/json").post("https://api.m3o.com/v1/user/Create");
-      Assert.assertEquals(body.getStatusCode(), 400);
+      String error = body.jsonPath().getString("detail");
+      Assert.assertEquals(error.toString(), "email already exists");
 
   }
   @Test
     void SuccessfulLogin(){
-        Response body= login();
+        Response body= getLoginResponse();
       String userId= body.jsonPath().getString("session.userId");
       Assert.assertEquals(userId.toString(), userId);
   }
@@ -65,16 +63,16 @@ public class TestCases {
 
     @Test
     void Logout(){
-        Response resp= login();
+        Response resp= getLoginResponse();
         String sessionId= resp.jsonPath().getString("session.id");
         Map<String, String> session = new HashMap<String, String>();
         session.put("sessionId", sessionId);
         Response body = RestAssured.given().auth().oauth2(token).body(session).contentType("application/json").post("https://api.m3o.com/v1/user/Logout");
         Assert.assertEquals(body.getStatusCode(), 200);
     }
-    @Test
-    void ZDeleteUser(){
-        Response resp= login();
+    @Test (priority = 100)
+    void DeleteUser(){
+        Response resp= getLoginResponse();
         String userId= resp.jsonPath().getString("session.userId");
         Map<String, String> session = new HashMap<String, String>();
         session.put("id", userId);
