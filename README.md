@@ -4,6 +4,7 @@
 * Language - Java
 * Test Framework - TestNG
 * Build Tool - Maven
+* Test Library - RestAssured
 
 #### How to set up the project
 * Clone the repository
@@ -17,8 +18,7 @@
 * Find the test report here 
   * /user-management-api-test-suite-gyscns/target/surefire-reports/Unzer User/emailable-report.html
 
-#### Potential areas of improvement
-* Use of data providers
+
 
 
 
