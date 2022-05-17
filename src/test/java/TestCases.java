@@ -1,6 +1,8 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -36,6 +38,7 @@ public class TestCases {
                 UserDetails.put("username", username);
        Response body= RestAssured.given().auth().oauth2(token).body(UserDetails).contentType("application/json").post(baseurl+ "/Create");
         Assert.assertEquals(body.getStatusCode(), 200);
+        System.out.println(body.getTime());
     }
   @Test
     void duplicateUserVerification(){
@@ -77,9 +80,12 @@ public class TestCases {
     void deleteUser(){
         Response resp= getLoginResponse();
         String userId= resp.jsonPath().getString("session.userId");
+
         Map<String, String> session = new HashMap<String, String>();
         session.put("id", userId);
         Response body = RestAssured.given().auth().oauth2(token).body(session).contentType("application/json").post(baseurl + "/Delete");
         Assert.assertEquals(body.getStatusCode(), 200);
     }
+
+
 }

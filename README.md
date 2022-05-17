@@ -18,10 +18,7 @@
 * Find the test report here 
   * /user-management-api-test-suite-gyscns/target/surefire-reports/Unzer User/emailable-report.html
 
-
-
-
-
+    
 ### Assignment
 Please create a simple test suite that verifies functionality of a public user management API available at https://m3o.com/user/api.
 
